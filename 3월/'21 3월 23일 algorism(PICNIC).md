@@ -64,11 +64,3 @@ def countPairings(*taken):
 
 countPairings(people)
 ```
-
-
-
-
-
-
-
-
