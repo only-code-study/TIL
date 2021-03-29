@@ -21,7 +21,7 @@ Todo앱을 만들려고 한다.
 DB로 firebase를 쓸 것이다.
 
 이하는 flutter 디자인이다. 
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
