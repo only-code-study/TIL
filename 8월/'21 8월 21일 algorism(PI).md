@@ -28,7 +28,7 @@
 11111222 
 12122222 
 22222222 
-12673939 
+12673939
 ```
 
 ## 예제 출력
@@ -39,3 +39,51 @@
 2
 14
 ```
+
+## 풀이
+```python
+import sys
+sys.setrecursionlimit(10**7)
+
+N = int(input())
+arr = input()
+
+def classify(a, b):
+    global arr
+    M = arr[a:b+1]
+    if M == M[0]*len(M): return 1
+    prograssive = True
+    for i in range(len(M)-1):
+        if  int(M[i+1]) - int(M[i]) != int(M[1]) - int(M[0]):
+            prograssive = False
+    if prograssive and abs(int(M[1]) - int(M[0])) == 1:
+        return 2
+    alternating = True
+    for i in range(len(M)):
+        if(int(M[i]) != int(M[i%2])):
+            alternating = False
+    if alternating: return 4
+    if prograssive: return 5
+    return 10
+
+cache = [-1]*10002
+def memorize(begin):
+    global arr
+    if(begin == len(arr)): return 0
+    ret = cache[begin]
+    if(ret != -1) : return ret
+    ret = 987654321
+    for L in range(3,6):
+        if begin + L <= len(arr):
+            ret = min(ret, memorize(begin + L) + classify(begin, begin + L - 1))
+    return ret
+
+for i in range(N):
+    print(memorize(0))
+    arr = input()
+```
+
+해답지처럼 썻다. DI이기 때문에 시간 초과가 날 것이다.
+
+여기서는 memorize부분과 실제적으로 문제를 푸는 부분을 나누어서 풀었다.
+기저사례와 문제 푸는 곳과 나뉘어서 푸는 것이 꽤 인상적이었다.
