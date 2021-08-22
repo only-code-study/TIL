@@ -20,9 +20,9 @@ def lis(arr):
     resultList.append(arr[0])
     # 계산하는 위치
     now = 0
-    #print(arr)
+    print(arr)
     for i in arr:
-        #print(resultList, now, i)
+        print(resultList, now, i)
         if i > resultList[now]:
             if len(resultList) - 1 == now:
                 resultList.append(i)
@@ -48,3 +48,20 @@ for i in range(c):
     a = list(map(int, input().split()))
     b = list(map(int, input().split()))
     print('#', i+1, max(lis(a+b), lis(b+a)))
+
+'''
+5 5
+3 4 5 7 2
+6 4 8 9 1
+# 7
+
+5 5
+3 4 5 7 2
+6 4 8 9 1
+# 7
+
+5 5
+2 7 7 7 1
+5 9 3 6 3
+# 4
+'''
