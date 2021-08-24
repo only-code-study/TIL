@@ -25,7 +25,6 @@ def classify(a, b):
 cache = [-1]*10002
 def memorize(begin):
     global arr
-    print(arr)
     if(begin == len(arr)): return 0
     ret = cache[begin]
     if(ret != -1) : return ret
