@@ -75,7 +75,7 @@ def memorize(begin):
     ret = 987654321
     for L in range(3,6):
         if begin + L <= len(arr):
-            ret = min(ret, memorize(begin + L) + classify(begin, begin + L - 1))
+            cache[begin] = ret = min(ret, memorize(begin + L) + classify(begin, begin + L - 1))
     return ret
 
 for i in range(N):
