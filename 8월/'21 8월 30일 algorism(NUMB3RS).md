@@ -49,3 +49,64 @@ dunibal.png
 0.83333333 0.00000000 0.16666667
 0.43333333 0.06666667 0.06666667 0.06666667
 ```
+
+## 풀이
+
+오래간만에 혼자 힘으로 풀어보았다.(전혀 답지를 보지 않았다!!)
+크게 2가지로 볼 수 있다. 
+
+1. 첫번째는 각 지역데서 다른 지역으로 갈 확률을 구하는 것, 
+1. 두번째는 다음날 그 지역으로 갈 수 있다면, 자기 자신이 가지고 있는 확률에 첫번째로 구햇던 다른 지역으로 갈 수 있는 확률을 곱하면 되는 것이다.
+
+```python
+def search(day):
+    global homePercentage, goPercentage, arr
+    if day == 0: return putResArr()
+    length = len(homePercentage)
+    tmpArr = [0] * length
+    for i in range(length):
+        for j in range(length):
+            if goPercentage[j] == 0: continue
+            elif arr[i][j] == 1:
+                tmpArr[i] = tmpArr[i] + homePercentage[j] / goPercentage[j]
+    homePercentage = tmpArr
+    return search(day - 1)
+
+def putResArr():
+    tmpArr = []
+    for i in resArr:
+        tmpArr.append(homePercentage[i])
+    return tmpArr
+
+def getGoPercentage():
+    global goPercentage, arr
+    pls = 0
+    for i in range(len(arr)):
+        for j in arr[i]:
+            if j == 1:
+                pls = pls + 1
+        goPercentage[i] = pls
+        pls = 0
+
+
+C = int(input())
+arr = []
+for i in range(C):
+    home, day, prison = map(int, input().split())
+    arr.clear()
+    for i in range(home):
+        arr.append(list(map(int, input().split())))
+    case = int(input())
+    resArr = list(map(int, input().split()))
+    # 현재 자신의 퍼센티지
+    homePercentage = [0] * home
+    # 다른 지역으로 갈 수 있는 확률
+    goPercentage = [0] * home
+    getGoPercentage()
+    homePercentage[prison] = 1
+
+    print()
+    for i in search(day):
+        print(i, end=" ")
+    print()
+```
