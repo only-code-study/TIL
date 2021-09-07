@@ -1,11 +1,5 @@
 cache = []
 N = int(input())
-for i in range(N):
-    n, m= map(int, input().split())
-    A = list(map(int, input().split()))
-    B = list(map(int, input().split()))
-    jlis()
-
 
 def jlis(indexA, indexB):
     ret = cache[indexA+1][indexB+1]
@@ -21,3 +15,10 @@ def jlis(indexA, indexB):
         if maxElement < B[nextB]:
             ret = max(ret, jlis(indexA, nextB) + 1)
     return ret
+
+for i in range(N):
+    n, m= map(int, input().split())
+    A = list(map(int, input().split()))
+    B = list(map(int, input().split()))
+    jlis()
+
