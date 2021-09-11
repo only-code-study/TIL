@@ -1,23 +1,31 @@
 C = int(input())
 
-cache = [''] * 51
-cache[0] = 'FX'
+def solve(start, count):
+    signCount = (int(start/3), int((start + count * 2) / 3))
+    signChar = []
+    ret = ''
+    startChar = start % 6
+    
+    for i in range(signCount[0], signCount[1]):
+        root = 0
+        for j in range(51): 
+            if (i - root) % ((root + 1) * 4) == 0:
+                signChar.append('+')
+                break
+            elif (i - root + (root + 1) * 2) % ((root + 1) * 4 ) == 0:
+                signChar.append('-')
+                break
+            root += j + 1
+    print(signChar)
 
-def solve(genaration):
-    if cache[genaration] != '': return cache[genaration]
-    for i in range(genaration + 1):
-        if cache[i] != '': continue
-        tmpst = cache[i - 1]
-        for j in list(tmpst):
-            if j == 'X':
-                cache[i] = cache[i] + 'X+YF'
-            elif j == 'Y':
-                cache[i] = cache[i] + 'FX-Y'
-            else:
-                cache[i] = cache[i] + j
-
-    return cache[genaration]
+    for i in range(startChar, startChar + count):
+        i = i % 6
+        if i == 3 or i == 0: ret += signChar.pop(0)
+        if i == 1 or i == 5: ret += 'F'
+        if i == 2: ret += 'X'
+        if i == 4: ret += 'Y'
+    return ret
 
 for i in range(C):
     n, p, l = map(int, input().split())
-    print(solve(n)[p - 1:p + l - 1])
+    print(solve(p, l))

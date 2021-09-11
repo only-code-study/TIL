@@ -1,15 +1,28 @@
 C = int(input())
 
+# 어떠한 수 뒤에 올 lis의 개수를 샌다 + 
+
 def solve():
     global N, arr
-    tmpArr = []
-    tmpArr.append(arr[0])
+    countArr = []
+    countArr.append(arr[0])
     maxLen = 1
+    tmpArr = []
+    tmpLen = 1
     for i in arr[1:]:
-        index = binary_search(tmpArr, i)
-        tmpArr = tmpArr[:index]
-        tmpArr.append(i) 
-        maxLen = max(maxLen, len(tmpArr))
+        index = binary_search(countArr, i)
+        countArr = countArr[:index]
+        countArr.append(i) 
+        maxLen = max(maxLen, len(countArr))
+        # 임시 배열에 배열을 추가
+        if maxLen > tmpLen:
+            tmpArr.clear()
+        tmpArr.append(countArr)
+        if len(countArr) < tmpLen:
+            tmpArr.pop()
+
+        tmpLen = maxLen
+    print(tmpArr)
     return maxLen
 
 def binary_search(arr, x):
