@@ -44,7 +44,7 @@ public class TestEntity {
 ### JpaRepository
 JpaReposity는 다음과 같이 상속한다.
 
-![JpaRepository상속 계층](https://github.com/only-code-study/TIL-oripk/blob/main/2022/2/JpaRepository1.png)
+![JpaRepository상속 계층](https://github.com/only-code-study/TIL-oripk/blob/main/2022/2/JpaRepository1.png?raw=true)
 
 그래서 일반적인 기능을 사용할 때는 CrudRepository를 사용하고, JPA의 모든 기능을 사용하고 싶다면, JpaRepository를 이용한다.
 
